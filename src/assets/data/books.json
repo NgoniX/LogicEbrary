@@ -1,0 +1,101 @@
+{
+
+    "books": [
+        {
+            "groups": [
+                {
+                    "category": "Academic",
+                    "covers": [
+                        {
+                            "title": "Up from Slavery",
+                            "author": "Booker T Washington",
+                            "genre": "History",
+                            "summary": "<div>Booker T. Washington</div><div>Washington, Booker T. (1856-1915) - American writer and</div><div>educationist.Born a slave in Virginia, he was later educated at the</div><div>Hampton Institute and went on to establish and head the Tuskegee</div><div>Institute in Alabama. Up From Slavery (1901) - Booker T.</div><div>Washington’s autobiography details his rise from slavery to the</div><div>leadership of his race. This is a simple yet dramatic record of</div><div>Washington’s dedication to the education of black Americans.</div>",
+                            "year": "1901",
+                            "file_name": "1501050991.pdf",
+                            "image": "1501050991.jpg"
+                        },
+                        {
+                            "title": "Romeo and Juliet",
+                            "author": "hgg",
+                            "genre": "gfd",
+                            "summary": "love",
+                            "year": "456",
+                            "file_name": "1501055871.pdf",
+                            "image": "1501055871.jpg"
+                        },
+                        {
+                            "title": "Pilgrim's Progress",
+                            "author": "John Bunyan",
+                            "genre": "Christian",
+                            "summary": "A dream",
+                            "year": "1678",
+                            "file_name": "1501057847.pdf",
+                            "image": "1501057847.jpg"
+                        },
+                        {
+                            "title": "Heart of Darkness",
+                            "author": "Joseph Conrad",
+                            "genre": "Literature",
+                            "summary": "Congo",
+                            "year": "1899",
+                            "file_name": "1501058540.pdf",
+                            "image": "1501058540.jpg"
+                        },
+                        {
+                            "title": "Think and Grow Rich",
+                            "author": "Napoleon Hill",
+                            "genre": "Personal Development",
+                            "summary": "Success",
+                            "year": "1937",
+                            "file_name": "1501060014.pdf",
+                            "image": "1501060014.jpg"
+                        },
+                        {
+                            "title": "Art of War",
+                            "author": "Sun Tzu",
+                            "genre": "Personal Development",
+                            "summary": "Military touch",
+                            "year": "5BC",
+                            "file_name": "1501062304.pdf",
+                            "image": "1501062304.jpg"
+                        },
+                        {
+                            "title": "As a Man Thinketh",
+                            "author": "James Allen",
+                            "genre": "Personal Development",
+                            "summary": "Thoughts are things.",
+                            "year": "1902",
+                            "file_name": "1501064920.pdf",
+                            "image": "1501064920.jpg"
+                        },
+                        {
+                            "title": "Mien Kamp",
+                            "author": "Adolf Hitler",
+                            "genre": "Biography",
+                            "summary": "Devils incarnet",
+                            "year": "1939",
+                            "file_name": "1501072281.pdf",
+                            "image": "1501072281.jpg"
+                        }
+                    ]
+                },
+                {
+                    "category": "Business",
+                    "covers": [
+                        {
+                            "title": "Start Your Own Business",
+                            "author": "Marc Hayes",
+                            "genre": "Business Strategy",
+                            "summary": "In this book bundle you will be guided through valuable step-by-step \r\nsystems to launch your new online career and begin making real money. \r\n<br><br>You can take the information in these guides to build your own online \r\ncareer, or you can do what most people do and never take that first step\r\n in a new direction.",
+                            "year": "2017",
+                            "file_name": "1501346194.pdf",
+                            "image": "1501346194.jpg"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+
+}

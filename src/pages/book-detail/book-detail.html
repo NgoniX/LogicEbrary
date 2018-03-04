@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Book</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-card>
+
+  <ion-item>
+    <h1>{{book.title}}</h1>
+  </ion-item>
+
+  <img src="{{ book.image }}">
+
+  <ion-card-content>
+    <span [innerHtml]="book.summary"></span>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+        <ion-note>
+        {{book.year}}
+      </ion-note>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+        {{book.author}}
+      </ion-note>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col center text-center>
+      <button ion-button block icon-start (click) = "readBook(book.file_name)">
+       <ion-icon name="book"></ion-icon>
+         Read Book
+      </button>
+    </ion-col>
+  </ion-row>
+
+</ion-card>
+
+</ion-content>

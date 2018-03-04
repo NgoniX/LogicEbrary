@@ -1,0 +1,45 @@
+$categories: (
+ ionic: color($colors, primary),
+ angular: #AC282B,
+ communication: #8E8D93,
+ tooling: #FE4C52,
+ services: #FD8B2D,
+ design: #FED035,
+ workshop: #69BB7B,
+ food: #3BC7C4,
+ documentation: #B16BE3,
+ navigation: #6600CC,
+);
+
+@function auxiliary-categories() {
+  @return map-remove($categories);
+}
+
+page-book {
+  @each $track, $value in auxiliary-categories() {
+   ion-item-sliding[track=#{$track}] ion-label {
+     border-left: 2px solid $value;
+     padding-left: 10px;
+   }
+  }
+
+.book {
+    vertical-align:top;
+    float: left;
+    width: 30%;
+    margin: 0 auto;
+    padding: 0 5px 0 0
+}
+
+.bg-text{
+
+  color:#333;
+ font-size:18px;
+ background: #ccc;
+ text-align: center;
+ font-family:"Trebuchet MS";
+ text-shadow: 0px 1px 0px rgba(255,255,255,255);
+
+}
+
+}

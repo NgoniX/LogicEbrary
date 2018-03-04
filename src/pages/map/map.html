@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Contact Us</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="outer-content contact-list">
+  <ion-list>
+    <ion-grid fixed>
+      <ion-row align-items-stretch>
+
+        <ion-col col-12 col-md-6 align-self-stretch align-self-center approxItemHeight="457px">
+
+          <ion-card class="contact-card">
+
+            <ion-card-content class="outer-content">
+              <ion-list>
+                <p align="center"><b>Logic Incorporated, No. 14432, Seke Rd</b></p>
+                <p align="center">Granite side</p>
+                <p align="center">Harare</p>
+                <p align="center">Zimbabwe</p>
+              </ion-list>
+            </ion-card-content>
+
+            <ion-row no-padding>
+              <ion-col col-12 col-lg-auto text-center text-lg-left>
+                <button ion-button clear small color="primary" icon-left (click)="goToWebsite(contact)">
+                  <ion-icon name="globe"></ion-icon>
+                  Visit Our Website
+                </button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row no-padding>
+              <ion-col col-12 col-lg-auto text-center text-lg-left>
+                <button ion-button clear small color="primary" icon-left (click)="goToFB()">
+                  <ion-icon name="logo-facebook"></ion-icon>
+                  Our Facebook Page
+                </button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row no-padding>
+              <ion-col col-12 col-lg-auto text-center text-lg-left>
+                <button ion-button clear small color="primary" icon-left (click)="goToTwitter()">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                  Our Twitter Page
+                </button>
+              </ion-col>
+            </ion-row>
+
+            <ion-row no-padding>
+              <ion-col col-12 col-lg-auto text-center text-lg-right>
+                <button ion-button clear small color="primary" icon-left (click)="openContact(contact)">
+                  <ion-icon name='chatboxes'></ion-icon>
+                  Contact Details
+                </button>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

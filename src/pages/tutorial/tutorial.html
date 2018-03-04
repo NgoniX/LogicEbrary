@@ -1,0 +1,44 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">Skip</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-1.png" class="slide-image"/>
+      <h2 class="slide-title">
+        Welcome to <b>Logic Ebrary</b>
+      </h2>
+      <p>
+        The <b>Logic Ebrary app</b> is a practical and fun way to read many of your favourite books in single place!
+      </p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/slidebox-browse.png" class="slide-image"/>
+      <h2 class="slide-title" >Browse Books</h2>
+      <p>Choose your books from a list of uploaded and updated e-library</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/slidebox-favourite.png" class="slide-image"/>
+      <h2 class="slide-title">Add To Book Shelf</h2>
+      <p>You can easily save your favourite book by swiping a list item to the left and tapping Add To Shelf, then read it even if you're offline!</p>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/>
+      <h2 class="slide-title">Ready to Go?</h2>
+      <button ion-button icon-right large clear (click)="startApp()">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

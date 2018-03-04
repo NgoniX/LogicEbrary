@@ -1,0 +1,74 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Academic Books</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="updateBook()"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content #content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list #bookList [hidden]="shownBooks === 0">
+
+    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+
+      <ion-item-divider ion-affix [content]="content">
+        <ion-label>
+          {{group.subcategory}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let cover of group.covers" #slidingItem [attr.name]="cover.title | lowercase" [hidden]="cover.hide">
+
+        <button ion-item (click)="goToBookDetail(cover)">
+
+         
+          <img class="book" src="{{ cover.image }}">
+         
+
+          <h3><b>{{cover.title}}</b></h3>
+          <p>  {{cover.genre}} </p>
+          <p> {{cover.year}} </p>
+          <p><i>Author: {{cover.author}} </i></p>
+          
+    
+
+        </button>
+
+        <ion-item-options>
+          <button ion-button color="favorite" (click)="addFavorite(slidingItem, cover)" *ngIf="segment === 'all'">
+            Add To Shelf
+          </button>
+          <button ion-button color="danger" (click)="removeFavorite(slidingItem, cover, 'Remove Book')" *ngIf="segment === 'favorites'">
+            Remove
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </ion-item-group>
+
+  </ion-list>
+
+  <ion-list-header class="bg-text" [hidden]="shownBooks > 0">
+      Nothing Found
+  </ion-list-header>
+
+
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPage">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
+</ion-content>

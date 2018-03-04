@@ -1,0 +1,58 @@
+{
+
+  "books": [{
+    "groups": [
+        {
+      "category": "Fiction",
+      "covers": [{
+        "name": "Harry Potter",
+        "author": "J.K Rowling",
+        "date": "21/06/2017",
+        "description": "Harry Potter book description",
+        "img": "assets/img/harry_book.jpg"
+      }, {
+        "name": "Jinx",
+        "author": "Sage Blackwood",
+        "date": "21/06/2017",
+        "img": "assets/img/fantasy_book.jpg",
+        "description": "The Wizard Apprentice"
+      }]
+    }, {
+      "category": "Horror",
+      "covers": [{
+        "name": "Nightscape",
+        "description": "In started in his dreams, the ended in nightmare",
+        "img": "assets/img/horror_book.jpg",
+        "author": "Steven R. George",
+        "date": "21/06/2017"
+      }]
+    }, {
+      "category": "Romance",
+      "covers": [{
+        "name": "Dark Desires",
+        "description": "Dark Desires After Dusk",
+        "author": "Kresley Cole",
+        "img": "assets/img/romance_book.jpg",
+        "date": "21/06/2017"
+      }]
+    }, {
+      "category": "Fantasy",
+      "covers": [{
+        "name": "Dragon Prince",
+        "description": "Marvelous Dragons all around",
+        "author": "Melanie Rawn",
+        "img": "assets/img/fantasy2_book.jpg",
+        "date": "21/06/2017"
+      }, {
+        "name": "Demon Storm",
+        "description": "Legends of the Ravens 3",
+        "img": "assets/img/fantasy3_book.jpg",
+        "author": "James Barclay",
+        "date": "21/06/2017"
+      }]
+    }
+
+    ]
+  }]
+
+}
