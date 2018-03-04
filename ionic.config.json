@@ -1,0 +1,8 @@
+{
+  "name": "logic-ebrary",
+  "app_id": "e2fb7ad0",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
