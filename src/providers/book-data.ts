@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Http} from '@angular/http';
 
+import { CacheService } from 'ionic-cache';
+
 import { UserData } from './user-data';
 
 import { AuthServiceProvider } from './auth-service/auth-service';
@@ -14,17 +16,23 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class BookData {
   data: any;
-  lastCreated: any;
+  books: Observable<any>;
+  booksKey = 'books';
 
-  constructor(public http: Http, public user: UserData, private authService: AuthServiceProvider) { 
+  // get url of api for books
+  url: string = this.authService.apiUrl + 'books';
+
+  // Specify custom TTL if you want
+  ttl: number = 5;
+
+  constructor(public http: Http, 
+    public user: UserData, 
+    private cache: CacheService,
+    private authService: AuthServiceProvider) { 
    
   }
 
-
-  load(lastCreated:any): any {
-    
-   // get url of api for books
-   let url = this.authService.apiUrl + 'books?lastCreated='+lastCreated;
+  load(): any {
 
   if (this.data) {
       // already loaded data
@@ -33,8 +41,12 @@ export class BookData {
 
     else {
 
-     return this.http.get(url)
+    let delayType = 'all';
+
+    let req = this.http.get(this.url)
         .map(this.processData, this);
+
+     return this.cache.loadFromDelayedObservable(this.url, req, this.booksKey, this.ttl, delayType);   
 
   }
 
@@ -45,12 +57,10 @@ export class BookData {
     // build up the data by linking speakers to books
     this.data = data.json();
 
-    this.data.tracks = [];
-
-    // loop through each day in the book
-    this.data.books.forEach((day: any) => {
-      // loop through each timeline group in the day
-      day.groups.forEach((group: any) => {
+    // loop through each book in the book
+    this.data.books.forEach((book: any) => {
+      // loop through each timeline group in the book
+      book.groups.forEach((group: any) => {
         // loop through each book in the timeline group
         group.covers.forEach((cover: any) => {
         });
@@ -60,16 +70,16 @@ export class BookData {
     return this.data;
   }
 
-getTimeline(dayIndex: number, queryText = '', segment = 'all', lastCreated: any) {
+getTimeline(bookIndex: number, queryText = '', segment = 'all') {
 
-    return this.load(lastCreated).map((data: any) => {
-      let day = data.books[dayIndex];
-      day.shownBooks = 0;
+    return this.load().map((data: any) => {
+      let book = data.books[bookIndex];
+      book.shownBooks = 0;
 
       queryText = queryText.toLowerCase().replace(/,|\.|-/g, ' ');
       let queryWords = queryText.split(' ').filter(w => !!w.trim().length);
 
-      day.groups.forEach((group: any) => {
+      book.groups.forEach((group: any) => {
         group.hide = true;
 
         group.covers.forEach((cover: any) => {
@@ -79,13 +89,13 @@ getTimeline(dayIndex: number, queryText = '', segment = 'all', lastCreated: any)
           if (!cover.hide) {
             // if this book is not hidden then this group should show
             group.hide = false;
-            day.shownBooks++;
+            book.shownBooks++;
           }
         });
 
       });
 
-      return day;
+      return book;
 
     })
 

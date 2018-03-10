@@ -91,7 +91,6 @@ export class LogicApp {
 
   rootPage: any;
   page: any;
-  lastCreated:any
 
   constructor(
     public events: Events,
@@ -122,7 +121,7 @@ export class LogicApp {
       });
 
     // load the book data
-    bookData.load(this.lastCreated);
+    bookData.load();
 
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {

@@ -39,10 +39,6 @@ export class BookPage {
   data: any;
   errorMessage: string;
 
-  //last created variable
-  postData = {
-    lastCreated: ''
-  }
 
   constructor(
     public alertCtrl: AlertController,
@@ -64,10 +60,8 @@ export class BookPage {
     // console.log('all keys are cleared');
     // });
 
-    this.getBooks();
-    console.log(this.getBooks());
+    //this.getBooks();
 
-    this.postData.lastCreated = '';
     
    }
 
@@ -135,16 +129,14 @@ export class BookPage {
     this.bookList && this.bookList.closeSlidingItems();
 
     
-    this.bookData.getTimeline(this.dayIndex, this.queryText, this.segment, this.postData)
+    this.bookData.getTimeline(this.dayIndex, this.queryText, this.segment)
     .subscribe((data: any) => {
 
       this.shownBooks = data.shownBooks;
       this.groups = data.groups;
 
-      let dataLength = this.groups.length;
-      this.postData.lastCreated = this.groups[dataLength - 1].covers[0].created;
+      //this.setBooks(data.groups)
 
-      this.setBooks(data.groups);
 
       /////////////////////////
 
@@ -153,33 +145,6 @@ export class BookPage {
   }
 
 
-  // function for load more books
-
-  loadMoreBooks() {
-    // Close any open sliding items when the Book updates
-    this.bookList && this.bookList.closeSlidingItems();
-
-    
-    this.bookData.getTimeline(this.dayIndex, this.queryText, this.segment, this.postData)
-    .subscribe((data: any) => {
-
-      this.shownBooks = data.shownBooks;
-
-      const newData = data.groups;
-
-      this.postData.lastCreated = newData[newData.length - 1].covers[0].created;
-
-      for(let i=0; i < newData.length; i++){
-        this.groups.push(newData[i]);
-      }
-
-      this.setBooks(newData);
-
-      /////////////////////////
-
-    });
-    
-  }
 
   // infinite scroll
   // doInfinite(e:any): Promise<any> {
@@ -314,7 +279,7 @@ export class BookPage {
   }
 
   doRefresh(refresher: Refresher) {
-    this.bookData.getTimeline(this.dayIndex, this.queryText, this.segment, this.postData).
+    this.bookData.getTimeline(this.dayIndex, this.queryText, this.segment).
     subscribe((data: any) => {
       this.shownBooks = data.shownBooks;
       this.groups = data.groups;

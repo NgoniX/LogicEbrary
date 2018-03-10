@@ -15,12 +15,26 @@ export class UserData {
     public storage: Storage
   ) {}
 
+  private storeData(){
+    localStorage.setItem("favorites", JSON.stringify(this._favorites));
+  }
+
+  private loadData(){
+    var favorites = localStorage.getItem("favorites");
+    if (favorites == null) {
+      return false;
+    } 
+    this._favorites = JSON.parse(favorites);
+  }
+
   hasFavorite(bookName: string): boolean {
+    this.loadData();
     return (this._favorites.indexOf(bookName) > -1);
   };
 
   addFavorite(bookName: string): void {
     this._favorites.push(bookName);
+    this.storeData();
   };
 
   removeFavorite(bookName: string): void {
@@ -28,6 +42,7 @@ export class UserData {
     if (index > -1) {
       this._favorites.splice(index, 1);
     }
+    this.storeData();
   };
 
   login(username: string): void {
