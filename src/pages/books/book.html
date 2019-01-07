@@ -1,53 +1,62 @@
 <ion-header>
-  <ion-navbar color="primary" no-border-bottom>
-    <button ion-button menuToggle>
+    <ion-navbar color="primary" no-border-bottom>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateBook()">
-      <ion-segment-button value="all">
-        All Books
-      </ion-segment-button>
-      <ion-segment-button value="favorites">
-        My Book Shelf
-      </ion-segment-button>
-    </ion-segment>
+        <ion-segment [(ngModel)]="segment" (ionChange)="updateBook()">
+            <ion-segment-button value="all">
+                {{ 'All Books' | translate }}
+            </ion-segment-button>
+            <ion-segment-button value="favorites">
+                {{ 'My Book Shelf' | translate }}
+            </ion-segment-button>
+        </ion-segment>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="presentFilter()">
-        <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="presentFilter()">
+             <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+         </button>
+        </ion-buttons>
 
-  <ion-toolbar no-border-top>
-    <ion-searchbar color="primary"
-                   [(ngModel)]="queryText"
-                   (ionInput)="updateBook()"
-                   placeholder="Search">
-    </ion-searchbar>
-  </ion-toolbar>
+
+
+    </ion-navbar>
+
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateBook()" [placeholder]="('Search' | translate)">
+        </ion-searchbar>
+    </ion-toolbar>
+
+    <ion-item>
+        <ion-label>{{ 'SELECT_LANGUAGE' | translate }}</ion-label>
+        <ion-select [(ngModel)]="languageSelected" (ionChange)='setLanguage()' [cancelText]="'CANCEL' | translate">
+            <ion-option *ngFor="let item of languages" [value]="item.code">{{item.name}}</ion-option>
+        </ion-select>
+    </ion-item>
+
+
 </ion-header>
 
 
 <ion-content #content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
-  <ion-list #bookList [hidden]="shownBooks === 0">
+    <ion-list #bookList [hidden]="shownBooks === 0">
 
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+        <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
 
-      <ion-item-divider ion-affix [content]="content">
-        <ion-label>
-          {{group.category}}
-        </ion-label>
-      </ion-item-divider>
+            <ion-item-divider ion-affix [content]="content">
+                <ion-label>
+                    {{group.category}}
+                </ion-label>
+            </ion-item-divider>
 
-      <ion-item-sliding *ngFor="let cover of group.covers" #slidingItem [attr.name]="cover.title | lowercase" [hidden]="cover.hide">
+            <ion-item-sliding *ngFor="let cover of group.covers" #slidingItem [attr.name]="cover.title | lowercase" [hidden]="cover.hide">
 
-        <button ion-item (click)="goToBookDetail(cover)">
+                <button ion-item (click)="goToBookDetail(cover)">
 
          
           <img class="book" src="{{ cover.image }}">
@@ -61,38 +70,38 @@
   
         </button>
 
-        <ion-item-options>
-          <button ion-button color="favorite" (click)="addFavorite(slidingItem, cover)" *ngIf="segment === 'all'">
+                <ion-item-options>
+                    <button ion-button color="favorite" (click)="addFavorite(slidingItem, cover)" *ngIf="segment === 'all'">
             Add To Shelf
           </button>
-          <button ion-button color="danger" (click)="removeFavorite(slidingItem, cover, 'Remove Book')" *ngIf="segment === 'favorites'">
+                    <button ion-button color="danger" (click)="removeFavorite(slidingItem, cover, 'Remove Book')" *ngIf="segment === 'favorites'">
             Remove
           </button>
-        </ion-item-options>
+                </ion-item-options>
 
-      </ion-item-sliding>
+            </ion-item-sliding>
 
 
-    </ion-item-group>
+        </ion-item-group>
 
-  </ion-list>
+    </ion-list>
 
-  <ion-list-header class="bg-text" [hidden]="shownBooks > 0">
-      Nothing Found
-  </ion-list-header>
+    <ion-list-header class="bg-text" [hidden]="shownBooks > 0">
+        Nothing Found
+    </ion-list-header>
 
-  <ion-fab bottom right #fab>
-    <button ion-fab><ion-icon name="share"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button ion-fab color="send" (click)="openSocial('Mail', fab)"><ion-icon name="mail"></ion-icon></button>
-      <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab color="whatsapp" (click)="openSocial('Whatsapp', fab)"><ion-icon name="logo-whatsapp"></ion-icon></button>
-      <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
+    <ion-fab bottom right #fab>
+        <button ion-fab><ion-icon name="share"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button ion-fab color="send" (click)="openSocial('Mail', fab)"><ion-icon name="mail"></ion-icon></button>
+            <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+            <button ion-fab color="whatsapp" (click)="openSocial('Whatsapp', fab)"><ion-icon name="logo-whatsapp"></ion-icon></button>
+            <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>
 
- <!-- infinite scroll -->
-  <!-- <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <!-- infinite scroll -->
+    <!-- <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
   <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
 

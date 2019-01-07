@@ -13,8 +13,6 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { SocialSharing } from '@ionic-native/social-sharing';
 
-import { AdMobFree } from '@ionic-native/admob-free';
-
 import { CacheModule } from "ionic-cache";
 
 import { IonAffixModule } from 'ion-affix/dist';
@@ -27,8 +25,13 @@ import { LogicApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
+import { NotesMenuPage } from '../pages/notes-menu/notes-menu';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
@@ -42,6 +45,7 @@ import { StorePage } from '../pages/store/store';
 import { LogicGamesPage } from '../pages/logic-games/logic-games';
 import { TeachingResourcesPage } from '../pages/teaching-resources/teaching-resources';
 import { ViewBookPage } from '../pages/view-book/view-book';
+import { ListNotesPage } from '../pages/list-notes/list-notes';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -54,6 +58,11 @@ import { LogicCloudPage } from '../pages/logic-cloud/logic-cloud';
 import { SmartTutorPage } from '../pages/smart-tutor/smart-tutor';
 import { LogicBoardPage } from '../pages/logic-board/logic-board';
 import { SelfAssessmentPage } from '../pages/self-assessment/self-assessment';
+import { TocPage } from '../pages/toc/toc';
+import { SettingsPage } from '../pages/settings/settings';
+
+import { AddNotePage } from '../pages/add-note/add-note';
+import { ViewNotePage } from '../pages/view-note/view-note';
 
 import { BookData } from '../providers/book-data';
 import { AudioData } from '../providers/audio-data';
@@ -63,7 +72,13 @@ import { NetworkConnProvider } from '../providers/network-conn/network-conn';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-header';
+import { NoteServiceProvider } from '../providers/note-service/note-service';
+import { LanguageProvider } from '../providers/language/language';
+import { HttpClient, HttpClientModule  } from '@angular/common/http';
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -73,6 +88,7 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     LoginPage,
     MapPage,
     PopoverPage,
+    NotesMenuPage,
     BookPage,
     AudioPage,
     AcademicPage,
@@ -83,6 +99,9 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     LogicGamesPage,
     TeachingResourcesPage,
     ViewBookPage,
+    AddNotePage,
+    ViewNotePage,
+    ListNotesPage,
     SignupPage,
     TabsPage,
     TutorialPage,
@@ -95,11 +114,14 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     SmartTutorPage,
     LogicBoardPage,
     SelfAssessmentPage,
+    TocPage,
+    SettingsPage,
     ParallaxHeaderDirective
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(LogicApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs' },
@@ -132,6 +154,13 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     IonicStorageModule.forRoot(),
     CacheModule.forRoot(),
     IonicAudioModule.forRoot(defaultAudioProviderFactory),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+          }
+    }),
     IonAffixModule
   ],
   bootstrap: [IonicApp],
@@ -142,6 +171,7 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     LoginPage,
     MapPage,
     PopoverPage,
+    NotesMenuPage,
     BookPage,
     AudioPage,
     AcademicPage,
@@ -152,6 +182,9 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     LogicGamesPage,
     TeachingResourcesPage,
     ViewBookPage,
+    AddNotePage,
+    ViewNotePage,
+    ListNotesPage,
     SignupPage,
     TabsPage,
     TutorialPage,
@@ -163,6 +196,8 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     SmartTutorPage,
     LogicBoardPage,
     SelfAssessmentPage,
+    TocPage,
+    SettingsPage,
     PublishWorksPage
   ],
   providers: [
@@ -177,9 +212,11 @@ import { ParallaxHeaderDirective } from '../directives/parallax-header/parallax-
     NetworkConnProvider,
     SocialSharing,
     Badge,
-    AdMobFree,
     AuthServiceProvider,
-    StatusBar
+    StatusBar,
+    NoteServiceProvider,
+    LanguageProvider,
+    HttpModule
   ]
 })
 export class AppModule { }

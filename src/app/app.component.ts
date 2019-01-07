@@ -32,6 +32,7 @@ import { BookData } from '../providers/book-data';
 import { UserData } from '../providers/user-data';
 
 import { CacheService } from "ionic-cache";
+import { TranslateService,  LangChangeEvent } from '@ngx-translate/core';
 
 export interface PageInterface {
   title: string;
@@ -48,6 +49,9 @@ export interface PageInterface {
   templateUrl: 'app.html'
 })
 export class LogicApp {
+
+  textDir: string = "ltr";
+
   // the root nav is a child of the root app component
   // @ViewChild(Nav) gets a reference to the app's root nav
   @ViewChild(Nav) nav: Nav;
@@ -101,8 +105,12 @@ export class LogicApp {
     public storage: Storage,
     public splashScreen: SplashScreen,
     cache: CacheService,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public translate: TranslateService
   ) {
+
+    translate.setDefaultLang('en');
+    translate.use('en');
 
     cache.setDefaultTTL(60 * 60); //set default cache TTL for 1 hour
 
@@ -130,6 +138,13 @@ export class LogicApp {
     this.enableMenu(true);
 
     this.listenToLoginEvents();
+
+    //this is to determine the text direction depending on the selected language
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) =>
+    {
+      this.textDir = event.lang == 'ar'? 'rtl' : 'ltr';
+    });
+
   }
 
   openPage(page: PageInterface) {

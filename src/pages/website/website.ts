@@ -12,7 +12,7 @@ export class WebsitePage {
    public platform: Platform) {
 
   	this.platform.ready().then(() => {
-      const browser = this.iab.create("http://www.logicebrary.co.zw",'_blank');
+      this.iab.create("http://www.logicebrary.co.zw",'_blank');
     });
 
   }

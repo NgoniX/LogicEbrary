@@ -1,17 +1,42 @@
-
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>View book</ion-title>
+  <ion-navbar color="primary" [hidden]="!showToolbars">
+    <ion-buttons start>
+      <button ion-button icon-only (tap)="toc($event)">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{pageTitle}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="settings($event)">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="showNotesOptions($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
- <iframe width="100%" height="100%" [src]="pdfUrl" frameborder="0" allowfullscreen>
-</iframe>
-
-
+<ion-content [ngStyle]="{'backgroundColor': bgColor}" no-bounce>
+  <div id="touchlayer" (tap)="toggleToolbars()" (swipe)="changePage($event)"></div>
+  <div id="book"></div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" *ngIf="showToolbars">
+    <ion-buttons start>
+      <button ion-button icon-only (tap)="prev()">
+        <ion-icon name="arrow-dropleft-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Page {{currentPage}} {{(book && book.pagination && book.pagination.totalPages) ? ' of ' + book.pagination.totalPages : ''}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="next()">
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,8 +1,15 @@
 {
   "name": "logic-ebrary",
-  "app_id": "e2fb7ad0",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/admin/books/pdfs/",
+      "proxyUrl": "http://logicebrary.co.zw"
+    }
+  ],
+  "pro_id": "e2fb7ad0",
+  "id": "e2fb7ad0"
 }
