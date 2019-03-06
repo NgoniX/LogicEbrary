@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+
 
 // url of api
 let apiUrl = 'http://www.logicebrary.co.zw/api/';
@@ -8,7 +8,7 @@ let apiUrl = 'http://www.logicebrary.co.zw/api/';
 @Injectable()
 export class AuthServiceProvider {
 
-  apiUrl: String;	
+  apiUrl: String;
 
   constructor(public http: Http) {
     this.apiUrl = apiUrl;

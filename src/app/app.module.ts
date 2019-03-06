@@ -4,26 +4,32 @@ import { NgModule, ErrorHandler } from '@angular/core';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
-import { Network } from '@ionic-native/network';
+import { Network } from '@ionic-native/network/ngx';
 
 import { IonicStorageModule } from '@ionic/storage';
 
-import { SocialSharing } from '@ionic-native/social-sharing';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { CacheModule } from "ionic-cache";
 
 import { IonAffixModule } from 'ion-affix/dist';
 
+import { AdMobFree } from '@ionic-native/admob-free/ngx';
+
+// text to speech
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+
 import { IonicAudioModule, defaultAudioProviderFactory } from 'ionic-audio';
 
-import { Badge } from '@ionic-native/badge';
+import { Badge } from '@ionic-native/badge/ngx';
 
 import { LogicApp } from './app.component';
 
-import { StatusBar } from '@ionic-native/status-bar';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
@@ -205,17 +211,19 @@ export function createTranslateLoader(http: HttpClient) {
     BookData,
     AudioData,
     AcademicData,
+    AdMobFree,
     UserData,
     InAppBrowser,
-    SplashScreen,
     Network,
     NetworkConnProvider,
     SocialSharing,
     Badge,
     AuthServiceProvider,
+    SplashScreen,
     StatusBar,
     NoteServiceProvider,
     LanguageProvider,
+    TextToSpeech,
     HttpModule
   ]
 })

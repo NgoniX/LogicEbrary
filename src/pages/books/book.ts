@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 
 import { AlertController, App, FabContainer, ItemSliding, List, ModalController, NavController, ToastController, LoadingController, Refresher } from 'ionic-angular';
 
-import { SocialSharing } from '@ionic-native/social-sharing';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { BookData } from '../../providers/book-data';
 import { UserData } from '../../providers/user-data';
@@ -14,13 +14,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { LanguageProvider } from './../../providers/language/language';
 import { LanguageModel } from "../../models/language.model";
 
-import { NetworkConnProvider } from '../../providers/network-conn/network-conn';
-
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'page-book',
   templateUrl: 'book.html'
 })
+
 export class BookPage {
 
   languageSelected : any = 'en';
@@ -53,9 +53,9 @@ export class BookPage {
     public toastCtrl: ToastController,
     public bookData: BookData,
     private socialSharing: SocialSharing,
-    private networkConn: NetworkConnProvider,
     public user: UserData,
     public translate: TranslateService,
+    public admob: AdMobFree,
     public languageService: LanguageProvider
   ) {
 
@@ -66,19 +66,16 @@ export class BookPage {
     // });
 
     //this.getBooks();
-
+    this.showBanner();
 
    }
 
    // show network connection message
    ionViewDidEnter() {
 
-     this.networkConn.networkConnect();
-
    }
 
    ionViewWillLeave(){
-     this.networkConn.networkDisconnect();
    }
 
   // select language
@@ -143,20 +140,35 @@ export class BookPage {
 
   }
 
+ // admob
+  showBanner() {
+
+    let bannerConfig: AdMobFreeBannerConfig = {
+        autoShow: true,
+        id: "ca-app-pub-4322995895522806/2796275263"
+    };
+
+    this.admob.banner.config(bannerConfig);
+
+    this.admob.banner.prepare().then(() => {
+        // success
+    }).catch(e => console.log(e));
+
+}
 
 
-  // infinite scroll
-  // doInfinite(e:any): Promise<any> {
-  //   console.log("Begin async operation");
-  //  return new Promise(resolve => {
-  //     setTimeout(() => {
-  //        // API Connection for more updates
-  //        //this.loadMoreBooks();
+  //infinite scroll
+  doInfinite(e:any): Promise<any> {
+    console.log("Begin async operation");
+   return new Promise(resolve => {
+      setTimeout(() => {
+         // API Connection for more updates
+         //this.loadMoreBooks();
 
-  //        resolve();
-  //      }, 500);
-  //     });
-  // }
+         resolve();
+       }, 500);
+      });
+  }
 
 
 

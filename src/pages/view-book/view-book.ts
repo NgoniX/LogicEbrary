@@ -3,6 +3,7 @@ import { NavController, Platform, PopoverController, Events, NavParams } from 'i
 import { TocPage } from '../toc/toc';
 import { SettingsPage } from '../settings/settings';
 import { NotesMenuPage } from '../notes-menu/notes-menu';
+import {TextToSpeech} from '@ionic-native/text-to-speech/ngx';
 
 declare var ePub: any;
 
@@ -10,6 +11,7 @@ declare var ePub: any;
   selector: 'page-view-book',
   templateUrl: 'view-book.html',
 })
+
 export class ViewBookPage {
 
   book: any;
@@ -21,13 +23,20 @@ export class ViewBookPage {
   bgColor: any;
   toolbarColor: string = 'primary';
 
+  rate: number;
+  locale: string;
+
   constructor(
     public navCtrl: NavController,
     public platform: Platform,
     public popoverCtrl: PopoverController,
     public events: Events,
     public navParams: NavParams,
+    private tts: TextToSpeech
     ) {
+
+    this.rate = 9;
+    this.locale = 'en-US';
 
     let book = this.navParams.data.book;
 
@@ -203,6 +212,18 @@ export class ViewBookPage {
     else {
       this.prev();
     }
+  }
+
+
+  //read book
+  playText() {
+    this.tts.speak({
+      text: this.book.metadata.bookTitle,
+      rate: this.rate / 10,
+      locale: this.locale
+    })
+      .then(() => console.log('Success'))
+      .catch((reason: any) => console.log(reason));
   }
 
 

@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Network } from '@ionic-native/network';
+import { Network } from '@ionic-native/network/ngx';
 import { ToastController } from 'ionic-angular'; 
 import { Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the NetworkConnProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class NetworkConnProvider {
 

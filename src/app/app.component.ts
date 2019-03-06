@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { Storage } from '@ionic/storage';
 
-import { StatusBar } from '@ionic-native/status-bar';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
@@ -48,6 +48,7 @@ export interface PageInterface {
 @Component({
   templateUrl: 'app.html'
 })
+
 export class LogicApp {
 
   textDir: string = "ltr";

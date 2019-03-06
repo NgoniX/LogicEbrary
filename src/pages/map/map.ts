@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-
 import {Platform, ActionSheet, ActionSheetController, Config } from 'ionic-angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })
+
 export class MapPage {
 
 	actionSheet : ActionSheet;
